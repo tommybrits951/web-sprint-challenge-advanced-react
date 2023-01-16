@@ -31,20 +31,20 @@ change = (e) => {
 submit = (e) => {
   e.preventDefault()
   const user = {
-    x: this.state.x,
-    y: this.state.y,
+    x: this.state.y,
+    y: this.state.x,
     steps: this.state.steps,
     email: this.state.email
   }
   axios.post(`http://localhost:9000/api/result`, user)
   .then(res => {
-    this.setState({...this.state, message: res.data.message})
+    this.setState({...this.state, message: res.data.message, email: ''})
   })
   .catch(err => {
-    console.log(err)
+    
     this.setState({...this.state, message: err.response.data.message})
   })
-  this.setState({...this.state, email: '', x: 2, y: 2, steps: 0, index: 4})
+  
 }
 move = (num, ref, cord) => {
   this.setState({...this.state, index: this.state.index + num, [ref]: this.state[ref] + cord, steps: this.state.steps + 1, message: ''})

@@ -73,8 +73,8 @@ function change(e) {
 function submit(e) {
   e.preventDefault()
   const user = {
-    x: spot.x,
-    y: spot.y,
+    x: spot.y,
+    y: spot.x,
     steps: spot.steps,
     email: spot.email
   }
@@ -82,10 +82,10 @@ console.log(spot)
   axios.post(`http://localhost:9000/api/result`, user)
   .then(res => {
     
-    setSpot({...spot, message: res.data.message, email: '', index: 4, x: 2, y: 2, steps: 0})
+    setSpot({...spot, message: res.data.message, email: ''})
   })
   .catch(err => {
-    setSpot({...spot, message: err.response.data.message})
+    setSpot({...spot, message: err.response.data.message, email: ''})
   })
 } 
 function reset() {
@@ -102,7 +102,7 @@ function reset() {
     <div id="wrapper" className={props.className}>
       <div className="info">
         <h3 id="coordinates">Coordinates ({spot.y}, {spot.x})</h3>
-        <h3 id="steps">You moved {spot.steps} {spot.steps === 1 ? "time" : "times"} </h3>
+        <h3 id="steps">You moved {spot.steps} {spot.steps === 1 ? "time" : "times"}</h3>
       </div>
       <div id="grid">
         {
